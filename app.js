@@ -1,18 +1,29 @@
 //atoms
-class Oxygen {
+class Atom {
     constructor() {
+        this.atom = document.createElement('div');
+        this.atom.classList.add('atom');
+        this.atom.innerHTML = 'O';
+        return this.atom;
+    }
+}
+
+//elements
+class Oxygen extends Atom {
+    constructor() {
+        super(Atom);
         this.protons = 8;
         this.neutrons = 8;
         this.electrons = 8;
         this.atomicWeight = 15.99;
         this.energyLevels = 2;
         this.atomicRadius = 48
-
     }
 }
 
-class Hydrogen {
+class Hydrogen extends Atom {
     constructor() {
+        super(Atom);
         this.protons = 1;
         this.neutrons = 0;
         this.electrons = 1;
@@ -22,8 +33,9 @@ class Hydrogen {
     }
 }
 
-class Helium {
+class Helium extends Atom {
     constructor() {
+        super(Atom);
         this.protons = 2;
         this.neutrons = 2;
         this.electrons = 2;
@@ -32,8 +44,9 @@ class Helium {
         this.atomicRadius = 31;
     }
 }
-class Carbon {
+class Carbon extends Atom {
     constructor() {
+        super(Atom);
         this.protons = 6;
         this.neutrons = 6;
         this.electrons = 6;
@@ -43,8 +56,9 @@ class Carbon {
     }
 }
 
-class Nitrogen {
+class Nitrogen extends Atom {
     constructor() {
+        super(Atom);
         this.protons = 7;
         this.neutrons = 7;
         this.electrons = 7;
@@ -93,8 +107,12 @@ class O3 {
     }
 }
 
-class main {
+class Main {
     constructor() {
-
+        const doc = document.querySelector('body');
+        const oxygen = new Oxygen();
+        doc.append(oxygen)
     }
 }
+
+const main = new Main();
