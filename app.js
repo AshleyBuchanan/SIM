@@ -8,27 +8,31 @@ class Atom {
     }
 
     static make(elementName) {
-        const left = ((Math.random() * 100) - 50);
-        const top = ((Math.random() * 100) - 50);
-
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        const x = ((Math.random() * screenWidth) - (screenWidth / 2));
+        const y = ((Math.random() * screenHeight) - (screenHeight / 2));
+        const vector = Math.random() * 360;
         const element = new elementName;
+        element.vector = vector;
+
         switch (element.color) {
             case 'Black':
                 element.color = '#000000BB';
                 element.style.color = 'Lightgrey';
                 break;
             case 'Blue':
-                element.style.textShadow = '0 0 1px White, 0 0 2px White, 0 0 3px White';
+                element.color = '#2222FF'
+                element.style.textShadow = '0 0 1px White, 0 0 2px White, 0 0 3px White, 0 0 9px White';
                 break;
         }
-
 
         element.innerHTML = element.label;
         element.style.backgroundColor = element.color;
         element.style.width = `${element.atomicRadius}px`;
         element.style.height = `${element.atomicRadius}px`;
-        element.style.left = `${50 + left}%`;
-        element.style.top = `${50 + top}%`;
+        element.style.left = `${(screenWidth / 2) + x}px`;
+        element.style.top = `${(screenHeight / 2) + y}px`;
         return element;
     }
 }
@@ -223,6 +227,46 @@ class Main {
             this.hydrogen,
         );
     }
+
+    static update() {
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        const atoms = document.querySelectorAll('.atom');
+        for (let atom of atoms) {
+            let width = parseFloat(atom.style.width) / 2;
+
+            let x = parseFloat(atom.style.left) || screenWidth;
+            let y = parseFloat(atom.style.top) || screenHeight;
+
+            const angleRadians = atom.vector * (Math.PI / 180);
+
+            const vx = Math.cos(angleRadians) * .8;
+            const vy = Math.sin(angleRadians) * .8;
+
+            x += vx;
+            y += vy;
+
+            if (x <= 0 + width || x + width >= screenWidth) {
+                atom.vector = 180 - atom.vector;
+            }
+            if (y <= 0 + width || y + width >= screenHeight) {
+                atom.vector = 360 - atom.vector;
+            }
+
+            atom.vector = (atom.vector + 360) % 360;
+
+            // x = Math.max(0, Math.min(x, screenWidth - width));
+            // y = Math.max(0, Math.min(y, screenHeight - width));
+
+            atom.style.left = `${x}px`;
+            atom.style.top = `${y}px`;
+        }
+    }
 }
 
 const main = new Main();
+
+let i = setInterval(() => {
+    Main.update()
+}, 16.67)
