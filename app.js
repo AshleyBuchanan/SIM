@@ -3,6 +3,36 @@ class Atom {
     constructor() {
         this.atom = document.createElement('div');
         this.atom.classList.add('atom');
+        this.atom.addEventListener('click', () => {
+            const infoCanvas = document.querySelector('#infoCanvas');
+            const oldInfoBlock = document.querySelector('#info');
+            if (oldInfoBlock) oldInfoBlock.remove();
+            const infoBlock = document.createElement('div')
+            infoBlock.id = 'info'
+            infoCanvas.append(infoBlock)
+            for (let entry of Object.entries(this.atom)) {
+                const titlePlaceHolder = document.createElement('div');
+                infoBlock.append(titlePlaceHolder);
+                const title = document.createElement('span');
+                title.id = 'title';
+                const hr = document.createElement('hr');
+                const p = document.createElement('p');
+
+                if (entry[0] === 'name') {
+                    title.innerText = entry[1];
+                    titlePlaceHolder.append(title);
+                } else if (entry[0] === 'label') {
+                    title.innerText = entry[1]
+                    titlePlaceHolder.append(title);
+                    titlePlaceHolder.append(hr);
+                } else if (entry[0] !== 'color' && entry[0] !== 'vector' && entry[0] !== 'velocity') {
+                    p.innerText = `${entry[0]}: ${entry[1]}`;
+                    infoBlock.append(p)
+                }
+            }
+
+            console.log([...Object.entries(this.atom)]);
+        });
         return this.atom;
     }
 
@@ -66,6 +96,7 @@ class Atom {
 class Oxygen extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Oxygen';
         this.label = 'O';
         this.color = 'Red'
         this.protons = 8;
@@ -80,6 +111,7 @@ class Oxygen extends Atom {
 class Hydrogen extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Hydrogen';
         this.label = 'H';
         this.color = 'White'
         this.protons = 1;
@@ -94,6 +126,7 @@ class Hydrogen extends Atom {
 class Helium extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Helium';
         this.label = 'He';
         this.color = 'White'
         this.protons = 2;
@@ -107,6 +140,7 @@ class Helium extends Atom {
 class Carbon extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Carbon';
         this.label = 'C';
         this.color = 'Black'
         this.protons = 6;
@@ -121,6 +155,7 @@ class Carbon extends Atom {
 class Nitrogen extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Nitrogen';
         this.label = 'N';
         this.color = 'Blue'
         this.protons = 7;
@@ -135,6 +170,7 @@ class Nitrogen extends Atom {
 class Chlorine extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Chlorine';
         this.label = 'Cl';
         this.color = 'Green'
         this.protons = 17;
@@ -149,6 +185,7 @@ class Chlorine extends Atom {
 class Sulphur extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Sulphur';
         this.label = 'S';
         this.color = 'Yellow'
         this.protons = 16;
@@ -163,6 +200,7 @@ class Sulphur extends Atom {
 class Sodium extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Sodium';
         this.label = 'Na';
         this.color = 'Violet'
         this.protons = 11;
@@ -177,6 +215,7 @@ class Sodium extends Atom {
 class Lead extends Atom {
     constructor() {
         super(Atom);
+        this.name = 'Lead';
         this.label = 'Pb';
         this.color = 'Pink'
         this.protons = 82;
