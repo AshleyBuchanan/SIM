@@ -10,6 +10,7 @@ html {
 
 body {
     background-color: lightgrey;
+    height: 100vh;
 }
 
 .atom {
@@ -58,11 +59,11 @@ footer {
     background-color: #00000066;
     color: white;
     width: 260px;
-    height: 565px;
+    height: 520px;
     right: 20px;
     top: 20px;
     border-radius: 1%;
-    padding: 4%;
+    padding: 3%;
 }
 
 #title {
