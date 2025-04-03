@@ -5,29 +5,34 @@ class Atom {
         this.atom.classList.add('atom');
         this.atom.addEventListener('click', () => {
             const infoCanvas = document.querySelector('#infoCanvas');
+
             const oldInfoBlock = document.querySelector('#info');
             if (oldInfoBlock) oldInfoBlock.remove();
-            const infoBlock = document.createElement('div')
-            infoBlock.id = 'info'
-            infoCanvas.append(infoBlock)
+
+            const infoBlock = document.createElement('div');
+            infoBlock.id = 'info';
+            infoCanvas.append(infoBlock);
+
+            const title = document.createElement('div');
+            title.id = 'title';
+            infoBlock.append(title);
+
+            const hr = document.createElement('hr');
+            infoBlock.append(hr);
+
             for (let entry of Object.entries(this.atom)) {
-                const titlePlaceHolder = document.createElement('div');
-                infoBlock.append(titlePlaceHolder);
-                const title = document.createElement('span');
-                title.id = 'title';
-                const hr = document.createElement('hr');
-                const p = document.createElement('p');
 
                 if (entry[0] === 'name') {
-                    title.innerText = entry[1];
-                    titlePlaceHolder.append(title);
+                    title.innerHTML += `<span class="left">${entry[1]}</span>`;
+
                 } else if (entry[0] === 'label') {
-                    title.innerText = entry[1]
-                    titlePlaceHolder.append(title);
-                    titlePlaceHolder.append(hr);
+                    title.innerHTML += `<span class="right">${entry[1]}</span>`;
+
                 } else if (entry[0] !== 'color' && entry[0] !== 'vector' && entry[0] !== 'velocity') {
-                    p.innerText = `${entry[0]}: ${entry[1]}`;
-                    infoBlock.append(p)
+                    const p = document.createElement('div');
+                    p.id = ('entries');
+                    p.innerHTML = `<span class="left">${entry[0]}:</span><span class="right">${entry[1]}</span>`;
+                    infoBlock.append(p);
                 }
             }
 
