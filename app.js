@@ -1,10 +1,31 @@
 //atoms
-
 class Atom {
     constructor() {
         this.atom = document.createElement('div');
         this.atom.classList.add('atom');
         return this.atom;
+    }
+
+    shellStructure() {
+        this.shell = [
+            [{ '1s': 0 }],
+            [{ '2s': 0 }, { '2p': 0 }],
+            [{ '3s': 0 }, { '3p': 0 }, { '3d': 0 }],
+            [{ '4s': 0 }, { '4p': 0 }, { '4d': 0 }, { '4f': 0 }],
+            [{ '5s': 0 }, { '5p': 0 }, { '5d': 0 }, { '5f': 0 }],
+            [{ '6s': 0 }, { '6p': 0 }, { '6d': 0 }],
+            [{ '7s': 0 }, { '7p': 0 }]
+        ]
+
+        this.max = [
+            [{ '1s': 2 }],
+            [{ '2s': 2 }, { '2p': 6 }],
+            [{ '3s': 2 }, { '3p': 6 }, { '3d': 10 }],
+            [{ '4s': 2 }, { '4p': 6 }, { '4d': 10 }, { '4f': 14 }],
+            [{ '5s': 2 }, { '5p': 6 }, { '5d': 10 }, { '5f': 14 }],
+            [{ '6s': 2 }, { '6p': 6 }, { '6d': 10 }],
+            [{ '7s': 2 }, { '7p': 6 }]
+        ]
     }
 
     static make(elementName) {
@@ -13,7 +34,9 @@ class Atom {
         const x = ((Math.random() * screenWidth) - (screenWidth / 2));
         const y = ((Math.random() * screenHeight) - (screenHeight / 2));
         const vector = Math.random() * 360;
+        const velocity = Math.random() * 2;
         const element = new elementName;
+
         element.vector = vector;
 
         switch (element.color) {
@@ -33,6 +56,8 @@ class Atom {
         element.style.height = `${element.atomicRadius}px`;
         element.style.left = `${(screenWidth / 2) + x}px`;
         element.style.top = `${(screenHeight / 2) + y}px`;
+        element.velocity = velocity;
+
         return element;
     }
 }
@@ -205,6 +230,7 @@ class O3 {
 class Main {
     constructor() {
         const doc = document.querySelector('body');
+
         this.oxygen = Atom.make(Oxygen)
         this.carbon = Atom.make(Carbon)
         this.nitrogen = Atom.make(Nitrogen)
@@ -241,8 +267,8 @@ class Main {
 
             const angleRadians = atom.vector * (Math.PI / 180);
 
-            const vx = Math.cos(angleRadians) * .8;
-            const vy = Math.sin(angleRadians) * .8;
+            const vx = Math.cos(angleRadians) * atom.velocity;
+            const vy = Math.sin(angleRadians) * atom.velocity;
 
             x += vx;
             y += vy;
@@ -256,8 +282,8 @@ class Main {
 
             atom.vector = (atom.vector + 360) % 360;
 
-            // x = Math.max(0, Math.min(x, screenWidth - width));
-            // y = Math.max(0, Math.min(y, screenHeight - width));
+            x = Math.max(0, Math.min(x, screenWidth - width));
+            y = Math.max(0, Math.min(y, screenHeight - width));
 
             atom.style.left = `${x}px`;
             atom.style.top = `${y}px`;
