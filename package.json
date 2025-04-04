@@ -1,22 +1,24 @@
 {
-  "name": "sim",
-  "version": "1.0.0",
-  "description": "I'm going to work on a simulation. Details soon.",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AshleyBuchanan/SIM.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AshleyBuchanan/SIM/issues"
-  },
-  "homepage": "https://github.com/AshleyBuchanan/SIM#readme",
-  "dependencies": {
-    "express": "^5.1.0"
-  }
+    "name": "sim",
+    "version": "1.0.0",
+    "description": "I'm going to work on a simulation. Details soon.",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AshleyBuchanan/SIM.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AshleyBuchanan/SIM/issues"
+    },
+    "homepage": "https://github.com/AshleyBuchanan/SIM#readme",
+    "dependencies": {
+        "ejs": "^3.1.10",
+        "express": "^5.1.0",
+        "method-override": "^3.0.0"
+    }
 }

@@ -1,4 +1,5 @@
-import { Atom } from './element_data/atoms.js'
+import { Atom } from '/element_data/atoms.js';
+
 //elements
 class Oxygen extends Atom {
     constructor() {
@@ -50,6 +51,8 @@ class Main {
         const screenHeight = window.innerHeight;
 
         const atoms = document.querySelectorAll('.atom');
+
+
         for (let atom of atoms) {
             let width = parseFloat(atom.style.width) / 2;
 
